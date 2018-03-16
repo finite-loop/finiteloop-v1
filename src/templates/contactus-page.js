@@ -5,13 +5,13 @@ import Typography from 'material-ui/Typography';
 import TextField from 'material-ui/TextField';
 import Button from "material-ui/Button";
 import { navigateTo } from "gatsby-link";
+import Helmet from 'react-helmet'
 
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 import Snackbar from 'material-ui/Snackbar';
 import Divider from 'material-ui/Divider';
 
-import Keys from '../../../config/APIKeys';
-
+import Keys from '../../config/APIKeys';
 
 import { compose, withProps, withStateHandlers } from 'recompose';
 import {
@@ -22,9 +22,11 @@ import {
     InfoWindow,
 } from "react-google-maps";
 
-//import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel'
-
 const styles = theme => ({
+    root: {
+        marginLeft: '20px',
+        marginRight: '20px',
+    },
     container: {
         display: 'flex',
         flex: 1,
@@ -84,10 +86,10 @@ const MapWithAMakredInfoWindow = compose(
 )(props =>
     <GoogleMap
         defaultZoom={16}
-        defaultCenter={{ lat: 12.933739, lng: 75.620947 }}
+        defaultCenter={{ lat: props.contactData.map.center.lat, lng: props.contactData.map.center.long }}
     >
         <Marker
-            position={{ lat: 12.933739, lng: 77.620947 }}
+            position={{ lat: props.contactData.map.position.lat, lng: props.contactData.map.position.long }}
             onClick={props.onToggleOpen}
         >
             {props.isOpen &&
@@ -96,35 +98,20 @@ const MapWithAMakredInfoWindow = compose(
                         <Typography component="h3" variant="headline" style={{
                             color: '#70A999',
                         }}>
-                            FiniteLoop Systems
+                            {props.siteTitle}
                         </Typography>
                         <Divider style={{ backgroundColor: '#70A999', marginTop: '5px' }} />
                         <Typography component="span" variant="body1">
-                            139, 1st A Cross Road,<br />
-                            Koramangala V Block<br />
-                            Bangalore - 560095<br />
-                            Phone : +91 98803 10676
+                            {props.contactData.address1}<br />
+                            {props.contactData.address2}<br />
+                            {props.contactData.cityPIN}, {props.contactData.stateCountry}<br />
+                            {props.contactData.phone} | {props.contactData.email}
                         </Typography>
                     </div>
                 </InfoWindow>}
         </Marker>
     </GoogleMap>
 );
-
-/* const MyMapComponent = withScriptjs(withGoogleMap((props) =>
-    <GoogleMap
-        defaultZoom={17}
-        defaultCenter={{ lat: 12.933739, lng: 77.620947 }}
-    >
-        <MarkerWithLabel
-            position={{ lat: 12.933739, lng: 77.620947 }}
-            labelAnchor={new google.maps.Point(5, 0)}
-            labelStyle={{ color: "#f9f9f9", border: "2px solid #70A999", backgroundColor: '#70A999', fontWeight: 500, fontSize: "18px", padding: "8px" }}
-        >
-            <div>FiniteLoop Systems</div>
-        </MarkerWithLabel>
-    </GoogleMap>
-)); */
 
 const GoogleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=" + Keys.googleMapsAPIKey + "&v=3.exp&libraries=geometry,drawing,places";
 
@@ -181,15 +168,17 @@ class ContactForm extends React.Component {
 
     render() {
         const { classes } = this.props;
+        const { contactus, global } = this.props.data;
         const { open, email, firstname, lastname, message, company, submitError } = this.state;
 
         return (
-            <div style={{ margin: '35px' }}>
+            <div className={classes.root}>
+                <Helmet title={global.frontmatter.siteTitle + " | " + contactus.frontmatter.title} />
                 <Typography style={{ lineHeight: 1.5, letterSpacing: 1.25, textAlign: 'center' }} variant="headline" component="h1">
-                    We would like to hear from you. If you are around the corner, we will be more than happy to share a cup of coffee with you.
+                    {contactus.frontmatter.heading}
                 </Typography>
                 <Typography style={{ lineHeight: 1.5, letterSpacing: 1.25, textAlign: 'center' }} variant="subheading" component="h2">
-                    Write to us, share your business needs, give us feedback, and we will get back to you the soonest.
+                    {contactus.frontmatter.subheading}
                 </Typography>
                 <div className={classes.container}>
                     <ValidatorForm
@@ -282,7 +271,7 @@ class ContactForm extends React.Component {
                         SnackbarContentProps={{
                             'aria-describedby': 'message-id',
                         }}
-                        message={<span id="message-id">Thank you for submitting your valuable inputs, we will get back to you soon.</span>}
+                        message={<span id="message-id">{contactus.frontmatter.submitMsg}</span>}
                     />
                     <div className={classes.maps}>
                         <MapWithAMakredInfoWindow
@@ -290,6 +279,8 @@ class ContactForm extends React.Component {
                             loadingElement={<div style={{ height: `100%` }} />}
                             containerElement={<div style={{ height: `400px` }} />}
                             mapElement={<div style={{ height: `100%` }} />}
+                            contactData={contactus.frontmatter}
+                            siteTitle={global.frontmatter.siteTitle}
                         />
                     </div>
                 </div >
@@ -303,3 +294,41 @@ ContactForm.propTypes = {
 };
 
 export default withStyles(styles)(ContactForm);
+
+
+export const pageQuery = graphql`
+  query ContactUsQuery($path: String!) {
+    contactus: markdownRemark(frontmatter: { path: { eq: $path } }) {
+      html
+      excerpt
+      frontmatter {
+        path
+        heading
+        subheading
+        title
+        address1
+        address2
+        cityPIN
+        stateCountry
+        phone
+        email
+        submitMsg
+        map{
+            position{
+                lat
+                long
+            }
+            center{
+                lat
+                long
+            }
+        }
+      }
+    }
+    global: markdownRemark(frontmatter: {templateKey: {eq: "global-settings"}}) {
+        frontmatter {
+          siteTitle
+        }
+      }
+  }
+`

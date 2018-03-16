@@ -68,7 +68,7 @@ class FooterNew extends React.Component {
                 <div className={classes.footerLinks}>
                     {this.props.links
                         .map(({ item: footerLinks }) => (
-                            <div>
+                            <div key={footerLinks.title} >
                                 {!footerLinks.newwindow &&
                                     <Button color="inherit" to={footerLinks.url} component={GatsbyLink} className={classes.button}>
                                         {footerLinks.title}

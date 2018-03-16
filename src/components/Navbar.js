@@ -81,7 +81,7 @@ class Navbar extends React.Component {
       <div className={classes.menuList}>
         {this.props.links
           .map(({ item: headerLinks }) => (
-            <Button component={GatsbyLink} to={headerLinks.url} className={classes.button} color="primary">
+            <Button key={headerLinks.title}  component={GatsbyLink} to={headerLinks.url} className={classes.button} color="primary">
               {headerLinks.title}
             </Button>
           ))
@@ -114,7 +114,7 @@ class Navbar extends React.Component {
               <div>
                 {this.props.links
                   .map(({ item: headerLinks }) => (
-                    <Button component={GatsbyLink} to={headerLinks.url} className={classes.button} color="primary">
+                    <Button  key={headerLinks.title} component={GatsbyLink} to={headerLinks.url} className={classes.button} color="primary">
                       {headerLinks.title}
                     </Button>
                   ))

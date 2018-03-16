@@ -153,3 +153,40 @@ collections:
                   - {label: "Twitter Site url", name: "twtrsiteurl", widget: string, required: false}
                   - {label: "Linkedin Site url", name: "lnkdnsiteurl", widget: string, required: false}
                   - {label: "Github Site url", name: "githubsiteurl", widget: string, required: false}
+      - file: "src/pages/contact/contact.md"
+        label: "Contact Us"
+        name: "contactus"
+        editor:
+          preview: false
+        fields:
+          - {label: "Template Key", name: "templateKey", widget: "hidden", default: "contactus-page"}
+          - {label: "Path", name: "path", widget: "hidden", default: "/contact"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Heading", name: "heading", widget: "text"}
+          - {label: "Sub Heading", name: "subheading", widget: "text"}
+          - {label: "Image", name: "image", widget: "image", required: false}
+          - {label: "Body", name: "body", widget: "markdown"}
+          - {label: "Address Line 1", name: "address1", widget: "string"}
+          - {label: "Address Line 2", name: "address2", widget: "string"}
+          - {label: "City & PINCode", name: "cityPIN", widget: "string"}
+          - {label: "State & Country", name: "stateCountry", widget: "string"}
+          - {label: "Phone", name: "phone", widget: "string"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Submit Message", name: "submitMsg", widget: "string"}
+          - {label: "Email", name: "email", widget: "string"}
+          - label: "Map"
+            name: "map"
+            widget: object
+            fields:
+            - label: "Position"
+              name: "position"
+              widget: object
+              fields:
+                - {label: "Lattitude", name: lat, widget: number, valueType: float, default: 0.00}
+                - {label: "Longitude", name: long, widget: number, valueType: float, default: 0.00}
+            - label: "Center Postion"
+              name: "center"
+              widget: object
+              fields:
+                - {label: "Lattitude", name: lat, widget: number, valueType: float, default: 0.00}
+                - {label: "Longitude", name: long, widget: number, valueType: float, default: 0.00}
