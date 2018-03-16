@@ -2,7 +2,7 @@
 templateKey: teams-page
 path: /team
 title: Team
-image: /img/products-grid1.jpg
+image: /img/OrgTrans.png
 teamTitle: Our Team
 teamDescription: >-
   We are a team of passionate business,design and technology professionals who
