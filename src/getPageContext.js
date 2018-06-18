@@ -1,23 +1,26 @@
 /* eslint-disable no-underscore-dangle */
 
-import { SheetsRegistry } from 'jss';
-import { createMuiTheme, createGenerateClassName } from 'material-ui/styles';
+import { SheetsRegistry } from "jss";
+import {
+  createMuiTheme,
+  createGenerateClassName
+} from "@material-ui/core/styles";
 
 // A theme with custom primary and secondary color.
 const fontWeightMedium = 600;
 const theme = createMuiTheme({
   typography: {
-    fontFamily: 'Futura',
-    fontWeight: fontWeightMedium,
+    fontFamily: "Futura",
+    fontWeight: fontWeightMedium
   },
   body1: {
-    fontWeight: fontWeightMedium,
+    fontWeight: fontWeightMedium
   },
   palette: {
-    primary: { main: '#8db2a6' },
-    secondary: { main: '#D65745' },
-    contrastThreshold: 3,
-  },
+    primary: { main: "#8db2a6" },
+    secondary: { main: "#D65745" },
+    contrastThreshold: 3
+  }
 });
 
 function createPageContext() {
@@ -28,7 +31,7 @@ function createPageContext() {
     // This is needed in order to inject the critical CSS.
     sheetsRegistry: new SheetsRegistry(),
     // The standard class name generator.
-    generateClassName: createGenerateClassName(),
+    generateClassName: createGenerateClassName()
   };
 }
 

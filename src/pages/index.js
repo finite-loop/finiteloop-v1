@@ -1,213 +1,217 @@
-import React from 'react'
-import Link from 'gatsby-link'
+import React from "react";
 
-import PropTypes from 'prop-types';
-import Typography from 'material-ui/Typography';
-import { withStyles } from 'material-ui/styles';
-import ServicesCarousel from '../components/ServicesCarousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import Teams from '../components/teams';
-import classNames from 'classnames';
+import PropTypes from "prop-types";
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
+import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
+import Teams from "../components/teams";
 
-import './index.scss';
-import { Divider } from 'material-ui';
-import Offerrings from '../components/Offerings';
-import CaseStudies from '../components/CaseStudies';
-import SEO from '../components/seo';
+import "../layouts/index.scss";
+import Offerrings from "../components/Offerings";
+import SEO from "../components/seo";
+import TemplateWrapper from "../components/layout";
 
 const styles = theme => ({
   initial: {
-    background: 'url(/img/headerBackground.svg) no-repeat top left',
-    paddingBottom: '50px'
+    background: "url(/img/headerBackground.svg) no-repeat top left",
+    paddingBottom: "50px"
   },
   header1: {
-    [theme.breakpoints.down('sm')]: {
-      padding: '150px 20px 100px 20px !important', // Overrides inline-style
+    [theme.breakpoints.down("sm")]: {
+      padding: "150px 20px 100px 20px !important" // Overrides inline-style
     },
-    marginTop: '50px',
-    padding: '150px 50px 100px 100px',
-    fontSize: '6vmin',
-    color: '#70A999',
-    letterSpacing: '1.29px',
-    width: '100%',
-    fontWeight: 500,
+    marginTop: "50px",
+    padding: "150px 50px 100px 100px",
+    fontSize: "6vmin",
+    color: "#70A999",
+    letterSpacing: "1.29px",
+    width: "100%",
+    fontWeight: 500
   },
   header2: {
-    margin: '10px 0px 0px 0px',
-    fontSize: '5vmin',
-    color: '#5C5C5C',
-    letterSpacing: '1.29px',
-    width: '24em',
-    textAlign: 'center',
+    margin: "10px 0px 0px 0px",
+    fontSize: "5vmin",
+    color: "#5C5C5C",
+    letterSpacing: "1.29px",
+    width: "24em",
+    textAlign: "center"
   },
   title1: {
-    fontSize: '36px',
-    color: '#5C5C5C',
-    letterSpacing: '1.29px',
-    textAlign: 'left',
-    textTransform: 'uppercase'
+    fontSize: "36px",
+    color: "#5C5C5C",
+    letterSpacing: "1.29px",
+    textAlign: "left",
+    textTransform: "uppercase"
   },
   more: {
-    textTransform: 'uppercase',
-    textAlign: 'center',
-    color: '#70A999',
-    fontSize: '18px',
-    lineHeight: '1.25',
+    textTransform: "uppercase",
+    textAlign: "center",
+    color: "#70A999",
+    fontSize: "18px",
+    lineHeight: "1.25"
   },
 
   // Offerrings Section
 
   offeringsSectionLeft: {
-    background: 'url(/img/kolamBackground.png) no-repeat top left',
-    display: 'flex',
-    [theme.breakpoints.down('sm')]: {
-      flexWrap: 'nowrap',
+    background: "url(/img/kolamBackground.png) no-repeat top left",
+    display: "flex",
+    [theme.breakpoints.down("sm")]: {
+      flexWrap: "nowrap"
     },
-    paddingTop: '50px',
-    paddingBottom: '50px',
+    paddingTop: "50px",
+    paddingBottom: "50px"
   },
   offeringsSectionRight: {
-    background: 'url(/img/kolamBackground.png) no-repeat top right',
-    display: 'flex',
-    [theme.breakpoints.down('sm')]: {
-      flexWrap: 'nowrap',
+    background: "url(/img/kolamBackground.png) no-repeat top right",
+    display: "flex",
+    [theme.breakpoints.down("sm")]: {
+      flexWrap: "nowrap"
     },
-    paddingTop: '50px',
-    paddingBottom: '50px',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: "50px",
+    paddingBottom: "50px",
+    alignItems: "center",
+    justifyContent: "center"
   },
   offeringLeft: {
     flex: 1,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    [theme.breakpoints.down('sm')]: {
-      display: 'none', // Overrides inline-style
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    [theme.breakpoints.down("sm")]: {
+      display: "none" // Overrides inline-style
     },
-    marginLeft: '5%',
-    marginRight: '5%',
+    marginLeft: "5%",
+    marginRight: "5%"
   },
   offeringRight: {
-    width: '100%',
-    marginLeft: '5%',
-    marginRight: '5%',
+    width: "100%",
+    marginLeft: "5%",
+    marginRight: "5%"
   },
   offeringBody1: {
-    fontSize: '1.25rem',
-    color: '#70A999',
-    letterSpacing: '0.71px',
+    fontSize: "1.25rem",
+    color: "#70A999",
+    letterSpacing: "0.71px",
     fontWeight: 500,
-    display: 'flex'
+    display: "flex"
   },
 
   // Teams Section styles
 
   teams: {
-    display: 'flex',
-    alignItems: 'stretch',
-    justifyContent: 'space-around',
+    display: "flex",
+    alignItems: "stretch",
+    justifyContent: "space-around"
   },
   teamsTitle: {
-    textAlign: 'center',
-    color: '#70A999',
-    fontSize: '36px',
-    margin: '20px',
-    fontWeight: 600,
+    textAlign: "center",
+    color: "#70A999",
+    fontSize: "36px",
+    margin: "20px",
+    fontWeight: 600
   },
   card: {
-    display: 'flex',
+    display: "flex",
     // marginTop: '5px',
     flex: 1,
-    maxWidth: '520px',
-    alignItems: 'center',
-    flexDirection: 'column',
-    minHeight: '100%',
+    maxWidth: "520px",
+    alignItems: "center",
+    flexDirection: "column",
+    minHeight: "100%",
     border: 0,
-    boxShadow: 'none',
-    backgroundColor: 'transparent',
+    boxShadow: "none",
+    backgroundColor: "transparent"
   },
   content: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column"
   },
   details: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '50%',
-    minHeight: '100%',
+    display: "flex",
+    flexDirection: "column",
+    width: "50%",
+    minHeight: "100%"
   },
   cover: {
-    width: '50%',
+    width: "50%"
   },
   controls: {
-    display: 'flex',
-    alignItems: 'center',
-    flexWrap: 'wrap',
+    display: "flex",
+    alignItems: "center",
+    flexWrap: "wrap",
     paddingLeft: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
-    justifyContent: 'space-evenly',
+    justifyContent: "space-evenly"
   },
   icons: {
-    paddingLeft: '5px',
+    paddingLeft: "5px"
   },
 
   // Case Studies section
   caseStudySection: {
-    marginLeft: '5%',
-    marginRight: '5%',
+    marginLeft: "5%",
+    marginRight: "5%"
   },
   caseStudycard: {
-    display: 'flex',
+    display: "flex",
     // marginTop: '5px',
     flex: 1,
-    maxWidth: '450px',
-    alignItems: 'center',
-    flexDirection: 'column',
-    minHeight: '100%',
-    border: '2px solid #70A999',
-    boxShadow: 'none',
-    backgroundColor: 'transparent',
-    marginLeft: '5%',
-    marginRightL: '5%',
+    maxWidth: "450px",
+    alignItems: "center",
+    flexDirection: "column",
+    minHeight: "100%",
+    border: "2px solid #70A999",
+    boxShadow: "none",
+    backgroundColor: "transparent",
+    marginLeft: "5%",
+    marginRightL: "5%"
   },
   caseStudymedia: {
     height: 350,
-    width: 300,
+    width: 300
   },
   caseStudycontent: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
-    backgroundColor: '#70A999',
-  },
-})
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    backgroundColor: "#70A999"
+  }
+});
 
 class IndexPage extends React.Component {
-
   render() {
     const { classes } = this.props;
     return (
-      <div>
-        <div style={{ background: 'linear-gradient(-180deg, #FAFAFA 0%, #F1F1F1 100%)' }}>
+      <TemplateWrapper>
+        <div
+          style={{
+            background: "linear-gradient(-180deg, #FAFAFA 0%, #F1F1F1 100%)"
+          }}
+        >
           <section className={classes.initial} name="initial">
             <Typography component="h1" className={classes.header1}>
-              We are a boutique consulting firm focusing on experience design and highly scalable technical architecture
+              We are a boutique consulting firm focusing on experience design
+              and highly scalable technical architecture
             </Typography>
-            <p className="line-1 anim-typewriter">
-              WE HELP YOU SCALE...
-            </p>
+            <p className="line-1 anim-typewriter">WE HELP YOU SCALE...</p>
           </section>
         </div>
-        <div style={{ background: 'white' }}>
+        <div style={{ background: "white" }}>
           <section name="more">
             <Typography component="span" className={classes.more}>
               More
               <br />
-              <i style={{ fontSize: '38px', lineHeight: 0.5 }} className="material-icons">keyboard_arrow_down</i>
+              <KeyboardArrowDown
+                style={{
+                  fontSize: "38px",
+                  lineHeight: 0.5,
+                  marginTop: "-10px"
+                }}
+              />
             </Typography>
           </section>
         </div>
@@ -215,20 +219,22 @@ class IndexPage extends React.Component {
         <Teams teamsData={this.props} />
         {/*<CaseStudies caseStudiesData={this.props} />*/}
         <SEO postEdges={this.props} />
-      </div >
-    )
+      </TemplateWrapper>
+    );
   }
 }
 
 IndexPage.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(IndexPage);
 
 export const teamsPageQuery = graphql`
   query Teams {
-    Teams: allMarkdownRemark(filter: {frontmatter: {templateKey: {eq: "teams-page"}}}) {
+    Teams: allMarkdownRemark(
+      filter: { frontmatter: { templateKey: { eq: "teams-page" } } }
+    ) {
       edges {
         node {
           html
@@ -256,7 +262,9 @@ export const teamsPageQuery = graphql`
         }
       }
     }
-    Offerings: allMarkdownRemark(filter: {frontmatter: {templateKey: {eq: "offering"}}}) {
+    Offerings: allMarkdownRemark(
+      filter: { frontmatter: { templateKey: { eq: "offering" } } }
+    ) {
       edges {
         node {
           excerpt(pruneLength: 400)
@@ -272,7 +280,9 @@ export const teamsPageQuery = graphql`
         }
       }
     }
-    Casestudies: allMarkdownRemark(filter: {frontmatter: {templateKey: {eq: "case-study"}}}) {
+    Casestudies: allMarkdownRemark(
+      filter: { frontmatter: { templateKey: { eq: "case-study" } } }
+    ) {
       edges {
         node {
           excerpt(pruneLength: 200)
@@ -288,4 +298,4 @@ export const teamsPageQuery = graphql`
       }
     }
   }
-`
+`;

@@ -1,64 +1,65 @@
-import React from 'react'
-import { withStyles } from 'material-ui/styles';
-import propTypes from 'prop-types';
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import propTypes from "prop-types";
 
-import Content, { HTMLContent } from '../components/Content'
-import Teams from '../components/teams';
-import SEO from '../components/seo';
+import Content, { HTMLContent } from "../components/Content";
+import Teams from "../components/teams";
+import SEO from "../components/seo";
+import TemplateWrapper from "../components/layout";
 
 const styles = theme => ({
   // Teams Section styles
 
   teams: {
-    display: 'flex',
-    alignItems: 'stretch',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "stretch",
+    justifyContent: "center"
   },
   teamsTitle: {
-    textAlign: 'center',
-    color: '#70A999',
-    fontSize: '36px',
-    margin: '20px',
-    fontWeight: 600,
+    textAlign: "center",
+    color: "#70A999",
+    fontSize: "36px",
+    margin: "20px",
+    fontWeight: 600
   },
   card: {
-    display: 'flex',
+    display: "flex",
     // marginTop: '5px',
     flex: 1,
-    maxWidth: '450px',
-    alignItems: 'center',
-    flexDirection: 'column',
-    minHeight: '100%',
+    maxWidth: "450px",
+    alignItems: "center",
+    flexDirection: "column",
+    minHeight: "100%",
     border: 0,
-    boxShadow: 'none',
-    backgroundColor: 'transparent',
+    boxShadow: "none",
+    backgroundColor: "transparent"
   },
   content: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column"
   },
   details: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '50%',
-    minHeight: '100%',
+    display: "flex",
+    flexDirection: "column",
+    width: "50%",
+    minHeight: "100%"
   },
   cover: {
-    width: '50%',
+    width: "50%"
   },
   controls: {
-    display: 'flex',
-    alignItems: 'center',
-    flexWrap: 'wrap',
+    display: "flex",
+    alignItems: "center",
+    flexWrap: "wrap",
     paddingLeft: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
-    justifyContent: 'space-evenly',
+    justifyContent: "space-evenly"
   },
   icons: {
-    paddingLeft: '5px',
-  },
+    paddingLeft: "5px"
+  }
 });
 
 /* export const TeamsPageTemplateV1 = ({ props, title, content, contentComponent, teams, teamTitle, teamDescription, timer }) => {
@@ -123,57 +124,69 @@ const styles = theme => ({
   )
 } */
 
-export const TeamsPageTemplate = ({ props, title, content, contentComponent, teams, teamTitle, teamDescription, timer, teamData }) => {
-  const PageContent = contentComponent || Content
-  const { classes, theme } = props;
+export const TeamsPageTemplate = ({
+  props,
+  title,
+  content,
+  contentComponent,
+  teams,
+  teamTitle,
+  teamDescription,
+  timer,
+  teamData
+}) => {
+  const PageContent = contentComponent || Content;
   return (
-    <section>
-      <div style={{ padding: '20px', lineHeight: '24px', letterSpacing: '1.29px' }}>
+    <TemplateWrapper>
+      <div
+        style={{ padding: "20px", lineHeight: "24px", letterSpacing: "1.29px" }}
+      >
         <PageContent content={content} />
       </div>
       <Teams teamsData={props} />
       <SEO postPath={teamData.frontmatter.path} postNode={teamData} postSEO />
-    </section>
-  )
-}
+    </TemplateWrapper>
+  );
+};
 
-const TeamsPageTemplateWrapper = (props) => {
-  const { classes, theme } = props;
-  const { edges: aboutus } = props.data.Teams
+const TeamsPageTemplateWrapper = props => {
+  const { edges: aboutus } = props.data.Teams;
   return (
     <div>
-      {aboutus
-        .map(({ node: aboutusData }) => (
-          <TeamsPageTemplate key={aboutusData.frontmatter.title}
-            contentComponent={HTMLContent}
-            title={aboutusData.frontmatter.title}
-            content={aboutusData.html}
-            teamTitle={aboutusData.frontmatter.teamTitle}
-            teamDescription={aboutusData.frontmatter.teamDescription}
-            teams={aboutusData.frontmatter.team}
-            props={props}
-            timer={1000}
-            teamData={aboutusData}
-            content={aboutusData.html}
-            contentComponent={HTMLContent}
-          />
-        ))
-      }
+      {aboutus.map(({ node: aboutusData }) => (
+        <TeamsPageTemplate
+          key={aboutusData.frontmatter.title}
+          contentComponent={HTMLContent}
+          title={aboutusData.frontmatter.title}
+          content={aboutusData.html}
+          teamTitle={aboutusData.frontmatter.teamTitle}
+          teamDescription={aboutusData.frontmatter.teamDescription}
+          teams={aboutusData.frontmatter.team}
+          props={props}
+          timer={1000}
+          teamData={aboutusData}
+          content={aboutusData.html}
+          contentComponent={HTMLContent}
+        />
+      ))}
     </div>
-  )
-}
+  );
+};
 
 TeamsPageTemplateWrapper.propTypes = {
   classes: propTypes.object.isRequired,
-  theme: propTypes.object.isRequired,
+  theme: propTypes.object.isRequired
 };
 
-export default withStyles(styles, { withTheme: true })(TeamsPageTemplateWrapper);
-
+export default withStyles(styles, { withTheme: true })(
+  TeamsPageTemplateWrapper
+);
 
 export const teamsPageQuery = graphql`
   query TeamsPage {
-    Teams: allMarkdownRemark(filter: {frontmatter: {templateKey: {eq: "teams-page"}}}) {
+    Teams: allMarkdownRemark(
+      filter: { frontmatter: { templateKey: { eq: "teams-page" } } }
+    ) {
       edges {
         node {
           html
@@ -202,5 +215,5 @@ export const teamsPageQuery = graphql`
         }
       }
     }
-}
-`
+  }
+`;

@@ -1,63 +1,60 @@
-import React from 'react'
-
-import PropTypes from 'prop-types';
-import Typography from 'material-ui/Typography';
-import { withStyles } from 'material-ui/styles';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const styles = theme => ({
   root: {
-    textAlign: 'center',
-    paddingTop: theme.spacing.unit * 20,
+    textAlign: "center",
+    paddingTop: theme.spacing.unit * 20
   },
   caption: {
     zIndex: 8,
-    whiteSpace: 'wrap',
-    color: 'rgb(0, 0, 0)',
-    backgroundColor: 'rgba(255, 255, 255, 0.81)',
-    visibility: 'inherit',
-    transition: 'none',
-    textAlign: 'left',
+    whiteSpace: "wrap",
+    color: "rgb(0, 0, 0)",
+    backgroundColor: "rgba(255, 255, 255, 0.81)",
+    visibility: "inherit",
+    transition: "none",
+    textAlign: "left",
     //lineHeight: '10%',
-    borderWidth: '0px',
-    margin: '0px',
-    padding: '5px 15px 10px',
-    letterSpacing: '0px',
+    borderWidth: "0px",
+    margin: "0px",
+    padding: "5px 15px 10px",
+    letterSpacing: "0px",
     fontWeight: 200,
-    fontSize: '2.6vmin',
-    minHeight: '0px',
-    minWidth: '0%',
-    maxHeight: '250px',
-    maxWidth: '350px',
-    height: 'auto',
+    fontSize: "2.6vmin",
+    minHeight: "0px",
+    minWidth: "0%",
+    maxHeight: "250px",
+    maxWidth: "350px",
+    height: "auto",
     opacity: 1,
-    transform: 'matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)',
-    transformOrigin: '50% 50% 0px',
-    overflow: 'hidden'
+    transform: "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)",
+    transformOrigin: "50% 50% 0px",
+    overflow: "hidden"
   }
 });
 
 class ServicesCarousel extends React.Component {
   state = {
-    open: false,
+    open: false
   };
 
   handleClose = () => {
     this.setState({
-      open: false,
+      open: false
     });
   };
 
   handleClick = () => {
     this.setState({
-      open: true,
+      open: true
     });
   };
 
   render() {
-    const { data, classes } = this.props
-    const { open } = this.state;
+    const { classes } = this.props;
 
     return (
       <section className="section">
@@ -71,62 +68,77 @@ class ServicesCarousel extends React.Component {
         >
           <div>
             <img src="img/Slider-Home.jpg" />
-            <div style={{ position: 'absolute', top: '10%', left: '65%' }}>
-              <div className={classes.caption}><i>finiteloop</i> is a cloud advisory, and technology solutions company.
+            <div style={{ position: "absolute", top: "10%", left: "65%" }}>
+              <div className={classes.caption}>
+                <i>finiteloop</i> is a cloud advisory, and technology solutions
+                company.
                 <br />
                 <br />
-                We work with Service Design, Frontned, Cloud, Blockchain, Salesforce and other technologies
+                We work with Service Design, Frontned, Cloud, Blockchain,
+                Salesforce and other technologies
               </div>
             </div>
           </div>
           <div>
             <img src="img/Slider-SRS2.jpg" />
-            <div style={{ position: 'absolute', top: '10%', left: '65%' }}>
-              <div className={classes.caption}><i>finiteloop</i> is a cloud advisory, and technology solutions company.
+            <div style={{ position: "absolute", top: "10%", left: "65%" }}>
+              <div className={classes.caption}>
+                <i>finiteloop</i> is a cloud advisory, and technology solutions
+                company.
                 <br />
                 <br />
-                We work with Service Design, Frontned, Cloud, Blockchain, Salesforce and other technologies
+                We work with Service Design, Frontned, Cloud, Blockchain,
+                Salesforce and other technologies
               </div>
             </div>
           </div>
           <div>
             <img src="img/SliderMain-HHH2.jpg" />
-            <div style={{ position: 'absolute', top: '10%', left: '65%' }}>
-              <div className={classes.caption}><i>finiteloop</i> is a cloud advisory, and technology solutions company.
+            <div style={{ position: "absolute", top: "10%", left: "65%" }}>
+              <div className={classes.caption}>
+                <i>finiteloop</i> is a cloud advisory, and technology solutions
+                company.
                 <br />
                 <br />
-                We work with Service Design, Frontned, Cloud, Blockchain, Salesforce and other technologies
+                We work with Service Design, Frontned, Cloud, Blockchain,
+                Salesforce and other technologies
               </div>
             </div>
           </div>
           <div>
             <img src="img/SliderMain-TDH1.jpg" />
-            <div style={{ position: 'absolute', top: '10%', left: '65%' }}>
-              <div className={classes.caption}><i>finiteloop</i> is a cloud advisory, and technology solutions company.
+            <div style={{ position: "absolute", top: "10%", left: "65%" }}>
+              <div className={classes.caption}>
+                <i>finiteloop</i> is a cloud advisory, and technology solutions
+                company.
                 <br />
                 <br />
-                We work with Service Design, Frontned, Cloud, Blockchain, Salesforce and other technologies
+                We work with Service Design, Frontned, Cloud, Blockchain,
+                Salesforce and other technologies
               </div>
             </div>
           </div>
           <div>
             <img src="img/SliderMain-Youth.jpg" />
-            <div style={{ position: 'absolute', top: '10%', left: '65%' }}>
-              <div className={classes.caption}><i>finiteloop</i> is a cloud advisory, and technology solutions company.
+            <div style={{ position: "absolute", top: "10%", left: "65%" }}>
+              <div className={classes.caption}>
+                <i>finiteloop</i> is a cloud advisory, and technology solutions
+                company.
                 <br />
                 <br />
-                We work with Service Design, Frontned, Cloud, Blockchain, Salesforce and other technologies
+                We work with Service Design, Frontned, Cloud, Blockchain,
+                Salesforce and other technologies
               </div>
             </div>
           </div>
         </Carousel>
       </section>
-    )
+    );
   }
 }
 
 ServicesCarousel.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(ServicesCarousel);
